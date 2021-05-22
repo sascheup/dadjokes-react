@@ -1,4 +1,5 @@
-import React, { useImperativeHandle, useState } from 'react';
+import React, { useState } from 'react';
+import { Joke } from './Joke/joke';
 import { render } from 'react-dom';
 import { jokes } from './jokes.js';
 import './style.css';
@@ -14,34 +15,16 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="joke">
-        <div className="joke__body">
-          <div className="joke__user">
-            <img className="user-avatar" src={firstJoke.avatar} />
-            <p className="user-name">{firstJoke.name}</p>
-          </div>
-
-          <p className="joke__text">{firstJoke.text}</p>
-        </div>
-        <div className="joke__likes">
-          <button
-            id="btn-up"
-            className="btn-like btn-like--up"
-            onClick={upHandler}
-          ></button>
-          <span id="likes-up" className="likes-count likes-count--up">
-            {upLikes}
-          </span>
-          <button
-            id="btn-down"
-            className="btn-like btn-like--down"
-            onClick={downHandler}
-          ></button>
-          <span id="likes-down" className="likes-count likes-count--down">
-            {downLikes}
-          </span>
-        </div>
-      </div>
+      {jokes.map((j) => (
+        <Joke
+          key={j.id}
+          userAvatar={j.avatar}
+          userName={j.name}
+          text={j.text}
+          likes={j.likes}
+          dislikes={j.dislikes}
+        />
+      ))}
     </div>
   );
 };
